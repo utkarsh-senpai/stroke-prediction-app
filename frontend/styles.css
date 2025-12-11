@@ -1,0 +1,162 @@
+/* Health Theme: Blues/Greens */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #0d6efd 0%, #198754 100%);
+    min-height: 100vh;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.form-check-label:hover {
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #198754, #0d6efd);
+    transition: width 0.3s ease;
+}
+
+.invalid-feedback {
+    display: none;
+    color: #dc3545;
+    font-size: 0.875em;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Result Badges */
+.badge {
+    font-size: 1.25rem;
+}
+
+.low-risk { background: #d4edda; color: #155724; }
+.moderate-risk { background: #fff3cd; color: #856404; }
+.high-risk { background: #f8d7da; color: #721c24; }
+
+/* Responsive */
+/*@media (max-width: 768px) {*/
+/*    .container { padding: 1rem; }*/
+/*    .card-body { p-3; }*/
+/*    .btn-lg { font-size: 1rem; padding: 0.75rem; }*/
+/*}*/
+
+/* Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+/* Container for the recommendation block */
+#recommendationSection {
+    text-align: left !important;          /* Override any parent .text-center */
+    margin-top: 1.5rem;
+}
+
+/* Card-like styling for the content */
+#recommendationContent {
+    background: #f8fafc;                  /* subtle light background */
+    border-radius: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    max-width: 760px;
+    margin: 0 auto;                       /* center the card, text stays left */
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Headings inside recommendation */
+#recommendationSection h4 {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    color: #0f172a;
+}
+
+#recommendationSection h6 {
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+/* Make sure bold text is actually bold */
+#recommendationSection strong,
+#recommendationSection b {
+    font-weight: 700 !important;
+}
+
+/* Paragraphs inside recommendation */
+#recommendationSection p {
+    margin-bottom: 0.35rem;
+    color: #334155;
+}
+
+/* Bullet lists styling */
+#recommendationSection ul {
+    margin: 0.25rem 0 0.75rem 0;
+    padding-left: 1.2rem;
+}
+
+#recommendationSection li {
+    margin-bottom: 0.25rem;
+    color: #334155;
+}
+
+/* Optional: subtle colored left border for sections */
+#recommendationSection h6::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 14px;
+    background: #3b82f6;
+    margin-right: 8px;
+    border-radius: 999px;
+}
+
+/* Optional: small label/tag above the card */
+#recommendationSection .rec-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+}
+
+#recommendationSection .rec-label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #22c55e;
+}

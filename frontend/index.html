@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Sentinel: Risk Assessment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-primary">
+<div class="container my-5">
+    <!-- Header -->
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-5">
+            <i class="fas fa-heartbeat fa-3x text-white mb-3"></i>
+            <h1 class="display-4 text-white fw-bold">Stroke Sentinel: Risk Assessment</h1>
+            <p class="lead text-light">A quick, private check for stroke risk. Answer 9 questions in 2 minutes—empower your health today.</p>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-12 col-md-8">
+            <div class="progress rounded-pill" style="height: 12px;">
+                <div class="progress-bar bg-success rounded-pill" id="progressBar" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <div class="text-center mt-2">
+                <small class="text-light">Step <span id="currentStep">1</span> of 9</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Steps Container -->
+    <div id="stepper" class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <!-- Step 1: Gender -->
+            <div class="step fade-in" id="step1">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-venus-mars text-primary me-2"></i>What's your gender?</h2>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+                                    <label class="form-check-label d-flex align-items-center" for="male">
+                                        <i class="fas fa-male fas-lg me-2 text-info"></i>Male
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>
+                                    <label class="form-check-label d-flex align-items-center" for="female">
+                                        <i class="fas fa-female fas-lg me-2 text-danger"></i>Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="other" value="Other" required>
+                                    <label class="form-check-label d-flex align-items-center" for="other">
+                                        <i class="fas fa-user fas-lg me-2 text-secondary"></i>Other
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(1)">
+                                <i class="fas fa-arrow-right me-2"></i>Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Age -->
+            <div class="step fade-in d-none" id="step2">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-birthday-cake text-primary me-2"></i>How old are you? (0-120 years)</h2>
+                        <input type="number" class="form-control form-control-lg rounded-pill" id="age" min="0" max="120" placeholder="Enter your age" required>
+                        <div class="invalid-feedback d-block">Age must be between 0 and 120.</div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(2)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(2)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Hypertension -->
+            <div class="step fade-in d-none" id="step3">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-heart text-danger me-2"></i>Do you have hypertension?</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="hypertension" id="hyp-no" value="0" required>
+                                    <label class="form-check-label d-flex align-items-center" for="hyp-no">
+                                        <i class="fas fa-times-circle text-success me-2"></i>No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="hypertension" id="hyp-yes" value="1" required>
+                                    <label class="form-check-label d-flex align-items-center" for="hyp-yes">
+                                        <i class="fas fa-exclamation-triangle text-warning me-2"></i>Yes
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(3)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(3)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Heart Disease -->
+            <div class="step fade-in d-none" id="step4">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-heart-broken text-danger me-2"></i>History of heart disease?</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="heart_disease" id="heart-no" value="0" required>
+                                    <label class="form-check-label d-flex align-items-center" for="heart-no">
+                                        <i class="fas fa-times-circle text-success me-2"></i>No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="heart_disease" id="heart-yes" value="1" required>
+                                    <label class="form-check-label d-flex align-items-center" for="heart-yes">
+                                        <i class="fas fa-exclamation-triangle text-warning me-2"></i>Yes
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(4)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(4)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Ever Married -->
+            <div class="step fade-in d-none" id="step5">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-ring text-secondary me-2"></i>Have you ever been married?</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ever_married" id="married-yes" value="Yes" required>
+                                    <label class="form-check-label d-flex align-items-center" for="married-yes">
+                                        <i class="fas fa-check-circle text-success me-2"></i>Yes
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ever_married" id="married-no" value="No" required>
+                                    <label class="form-check-label d-flex align-items-center" for="married-no">
+                                        <i class="fas fa-times-circle text-danger me-2"></i>No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(5)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(5)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Work Type -->
+            <div class="step fade-in d-none" id="step6">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-briefcase text-primary me-2"></i>What's your work type?</h2>
+                        <select class="form-select form-select-lg rounded-pill" id="work_type" required>
+                            <option value="">Choose one...</option>
+                            <option value="Govt_job">Government Job</option>
+                            <option value="children">Children (not working)</option>
+                            <option value="Never_worked">Never Worked</option>
+                            <option value="Private">Private Sector</option>
+                            <option value="Self-employed">Self-Employed</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a work type.</div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(6)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(6)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7: Residence Type -->
+            <div class="step fade-in d-none" id="step7">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-home text-info me-2"></i>Where do you live?</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Residence_type" id="rural" value="Rural" required>
+                                    <label class="form-check-label d-flex align-items-center" for="rural">
+                                        <i class="fas fa-tree text-success me-2"></i>Rural
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Residence_type" id="urban" value="Urban" required>
+                                    <label class="form-check-label d-flex align-items-center" for="urban">
+                                        <i class="fas fa-city text-primary me-2"></i>Urban
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(7)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(7)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 8: Avg Glucose Level -->
+            <div class="step fade-in d-none" id="step8">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-vial text-warning me-2"></i>Average glucose level (mg/dL, 50-300)</h2>
+                        <input type="number" class="form-control form-control-lg rounded-pill" id="avg_glucose_level" min="50" max="300" step="0.1" placeholder="e.g., 100" required>
+                        <div class="invalid-feedback d-block">Must be between 50 and 300 mg/dL.</div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(8)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(8)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 9: BMI -->
+            <div class="step fade-in d-none" id="step9">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-weight-hanging text-secondary me-2"></i>Your BMI (10-100)</h2>
+                        <input type="number" class="form-control form-control-lg rounded-pill" id="bmi" min="10" max="100" step="0.1" placeholder="e.g., 25" required>
+                        <div class="invalid-feedback d-block">Must be between 10 and 100.</div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(9)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill" onclick="nextStep(9)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 10: Smoking Status (Updated Options) -->
+            <div class="step fade-in d-none" id="step10">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="card-title mb-4"><i class="fas fa-smoking text-muted me-2"></i>Your smoking status?</h2>
+                        <select class="form-select form-select-lg rounded-pill" id="smoking_status" required>
+                            <option value="">Choose one...</option>
+                            <option value="smokes">Currently smokes</option>
+                            <option value="never smoked">Never smoked</option>
+                            <option value="formerly smoked">Formerly smoked</option>
+                        </select>
+                        <div class="invalid-feedback">Please select your status.</div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-outline-secondary me-2 rounded-pill" onclick="prevStep(10)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                            <button type="button" class="btn btn-success btn-lg w-100 rounded-pill" id="submitBtn" onclick="submitForm()">
+                                <i class="fas fa-calculator me-2"></i>Assess My Risk
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner (Hidden) -->
+    <div id="loadingSpinner" class="row justify-content-center d-none mt-4">
+        <div class="col-12 col-md-8 text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Assessing risk...</span>
+            </div>
+            <p class="mt-2 text-primary">Analyzing your data—almost there!</p>
+        </div>
+    </div>
+
+    <!-- Result Section (Hidden) -->
+    <div id="resultSection" class="row justify-content-center d-none mt-5">
+        <div class="col-12 col-md-8">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-5 text-center">
+                    <i class="fas fa-chart-line fa-3x mb-3" id="resultIcon"></i>
+                    <h2 id="resultTitle" class="mb-3"></h2>
+                    <div id="resultProb" class="display-5 fw-bold mb-3"></div>
+                    <span id="riskBadge" class="badge rounded-pill px-4 py-2 fs-5 mb-3"></span>
+                    <p id="resultMessage" class="lead text-muted"></p>
+                    <div id="recommendationSection" class="mt-4 d-none">
+                        <div class="rec-label">
+                            <span class="rec-label-dot"></span>
+                            <span>Personalized Recommendations</span>
+                        </div>
+                        <h4 class="mb-3">Lifestyle & Prevention Guidance</h4>
+                        <div id="recommendationContent"></div>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-primary btn-lg rounded-pill" onclick="resetForm()">
+                        <i class="fas fa-redo me-2"></i>New Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="script.js"></script>
+</body>
+</html>

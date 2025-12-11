@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        // Add if needed for Python/JS plugins
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.20' apply false  // Optional for JS if using Kotlin/JS
+}
+
+rootProject.name = 'stroke-prediction-app'
+include 'model-training'
+include 'backend'
+include 'frontend'
+include 'model-training'
+
